@@ -1,0 +1,55 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    static class Student {
+        String name;
+        double score;
+
+        Student(String name, double score) {
+            this.name = name;
+            this.score = score;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Student> students = new ArrayList<>();
+        System.out.print("               ***** WELCOME TO STUDENT GRADE TRACKER *****");
+        scanner.nextLine();
+        System.out.print("Enter number of students: ");
+        int count = scanner.nextInt();
+        scanner.nextLine(); 
+
+        for (int i = 0; i < count; i++) {
+            System.out.print("Enter student name: ");
+            String name = scanner.nextLine();
+
+            System.out.print("Enter " + name + "'s grade: ");
+            double score = scanner.nextDouble();
+            scanner.nextLine();
+
+            students.add(new Student(name, score));
+        }
+
+        double sum = 0, highest = Double.MIN_VALUE, lowest = Double.MAX_VALUE;
+
+        for (Student s : students) {
+            sum += s.score;
+            if (s.score > highest) highest = s.score;
+            if (s.score < lowest) lowest = s.score;
+        }
+
+        double average = sum / students.size();
+
+        System.out.println("\n--- Summary Report ---");
+        for (Student s : students) {
+            System.out.println(s.name + ": " + s.score);
+        }
+        System.out.printf("Average Score: %.2f\n", average);
+        System.out.printf("Highest Score: %.2f\n", highest);
+        System.out.printf("Lowest Score: %.2f\n", lowest);
+
+        scanner.close();
+    }
+}
